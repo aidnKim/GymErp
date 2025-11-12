@@ -23,8 +23,8 @@ public class FileStorageProperties {
 		if (!StringUtils.hasText(targetPath)) {
 			String os = System.getProperty("os.name").toLowerCase();
 			targetPath = os.contains("win")
-				? "C:/playground/final_project/GymErp/profile/"
-				: "profile";
+					? "C:/playground/final_project/GymErp/profile/"
+					: "profile";
 		}
 		return Paths.get(targetPath).toAbsolutePath().normalize();
 	}
