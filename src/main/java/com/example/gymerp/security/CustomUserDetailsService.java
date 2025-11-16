@@ -26,6 +26,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         
 		// 로그인용 DAO 메소드 (비밀번호 포함)
 		EmpDto emp = empDao.selectAuthByEmail(email);
+
+		// ================== DEBUG LINE ==================
+		System.out.println("Found user for email '" + email + "': " + emp);
+		// ================================================
+
 		if(emp == null) {
 			throw new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email);
 		}
