@@ -109,8 +109,8 @@ jobs:
               --network "${{ env.NETWORK_NAME }}" \
               -p "${{ env.APP_PORT }}:${{ env.APP_PORT }}" \
               -e ORACLE_URL=jdbc:oracle:thin:@${{ env.ORACLE_CONTAINER_NAME }}:1521:xe \
-              -e FILE_LOCATION=/app/upload \ 
-              -v /home/ec2-user/spring/upload:/app/upload \ 
+              -e FILE_LOCATION=/app/upload \
+              -v /home/ec2-user/spring/upload:/app/upload \
               "${{ env.IMAGE_NAME }}:latest"
 
 
