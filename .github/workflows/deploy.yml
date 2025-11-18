@@ -78,7 +78,9 @@ jobs:
           strip_components: 1
 
 
-      # ---- EC2에서 컨테이너 재기동 ----
+      # ---- EC2에서 컨테이너 재기동 ---- echo 2/4 의 아래 두 줄은 최종프로젝트하며 추가
+              # -e FILE_LOCATION=/app/upload \ # <-- 이 줄 추가(최종p 사진 업로드용)
+              # -v /home/ec2-user/spring/upload:/app/upload \ # <-- 이 줄 추가(최종p 사진 업로드용)
       - name: Deploy container on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -107,8 +109,8 @@ jobs:
               --network "${{ env.NETWORK_NAME }}" \
               -p "${{ env.APP_PORT }}:${{ env.APP_PORT }}" \
               -e ORACLE_URL=jdbc:oracle:thin:@${{ env.ORACLE_CONTAINER_NAME }}:1521:xe \
-              -e FILE_LOCATION=/app/upload \ # <-- 이 줄 추가
-              -v /home/ec2-user/spring/upload:/app/upload \ # <-- 이 줄 추가
+              -e FILE_LOCATION=/app/upload \ 
+              -v /home/ec2-user/spring/upload:/app/upload \ 
               "${{ env.IMAGE_NAME }}:latest"
 
 
