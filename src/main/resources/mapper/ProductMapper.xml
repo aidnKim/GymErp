@@ -29,25 +29,9 @@
 		            pr.isActive,
 		            pr.codeBId,
 		            cb.name AS codeBName,
-		            (NVL(pi.total_in, 0) - NVL(sa.total_out, 0) - NVL(si.total_sales, 0)) AS quantity
+		            pr.current_stock AS quantity -- 실시간 연산 제거 -> 컬럼 직접 조회 (O(1))
 		        FROM product pr
 		        LEFT JOIN codeB cb ON pr.codeBId = cb.codeBId
-		        LEFT JOIN (
-		            SELECT productId, SUM(quantity) AS total_in
-		            FROM PURCHASE
-		            GROUP BY productId
-		        ) pi ON pr.productId = pi.productId
-		        LEFT JOIN (
-		            SELECT productId, SUM(quantity) AS total_out
-		            FROM STOCKADJUSTMENT
-		            GROUP BY productId
-		        ) sa ON pr.productId = sa.productId
-		        LEFT JOIN (
-		            SELECT productId, SUM(quantity) AS total_sales
-		            FROM SALES_ITEM
-		            WHERE status='ACTIVE'
-		            GROUP BY productId
-		        ) si ON pr.productId = si.productId
 		        <include refid="search"/>
 		        <if test="sortBy != null and sortBy != ''">
 		            ORDER BY
@@ -112,8 +96,8 @@
 			SELECT product_seq.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO product
-		(productId, codeBId, name, price, isActive, createdAt, profileImage, note)
-		VALUES(#{productId}, #{codeBId}, #{name}, #{price}, #{isActive}, #{createdAt}, #{profileImage, jdbcType=VARCHAR}, #{note, jdbcType=VARCHAR})
+		(productId, codeBId, name, price, isActive, createdAt, profileImage, note, current_stock)
+		VALUES(#{productId}, #{codeBId}, #{name}, #{price}, #{isActive}, #{createdAt}, #{profileImage, jdbcType=VARCHAR}, #{note, jdbcType=VARCHAR}, 0)
 	</insert>
 	
 	<update id="update" parameterType="productDto">

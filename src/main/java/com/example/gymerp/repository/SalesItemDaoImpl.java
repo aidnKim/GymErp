@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class SalesItemDaoImpl implements SalesItemDao {
 
     private final SqlSession session;
-    
+
     private static final String NAMESPACE = "SalesItemMapper";
 
     // 1. 전체 상품 판매 내역 조회 (페이징/필터 포함)
@@ -37,9 +37,8 @@ public class SalesItemDaoImpl implements SalesItemDao {
     public SalesItemDto selectSalesItemById(Long itemSalesId) {
         return session.selectOne(NAMESPACE + ".selectSalesItemById", itemSalesId);
     }
-    
+
     // ========== [재고/수정 관련 추가 구현] ==========
-    
 
     // 판매 내역 수정 및 삭제 시, 기존 수량(oldQuantity)과 상품 정보(productId, codeBId)를 조회합니다.
 
@@ -48,14 +47,13 @@ public class SalesItemDaoImpl implements SalesItemDao {
         return session.selectOne(NAMESPACE + ".selectSalesItemForAdjustment", itemSalesId);
     }
 
-
     // 재고 환원 (입고) 내역을 Purchase 테이블에 기록합니다. (판매 취소/수량 감소 시 사용)
 
     @Override
     public void insertPurchaseForRefund(Map<String, Object> params) {
         session.insert(NAMESPACE + ".insertPurchaseForRefund", params);
     }
-    
+
     // 4. 상품 판매 내역 등록
     @Override
     public int insertSalesItem(SalesItemDto salesItem) {
@@ -81,5 +79,9 @@ public class SalesItemDaoImpl implements SalesItemDao {
         return session.selectList(NAMESPACE + ".selectItemSalesAnalytics", params);
     }
 
-    
+    // 8. 판매 후 상품 재고 업데이트
+    @Override
+    public int updateProductStockAfterSale(Map<String, Object> params) {
+        return session.update("SalesItemMapper.updateProductStockAfterSale", params);
+    }
 }

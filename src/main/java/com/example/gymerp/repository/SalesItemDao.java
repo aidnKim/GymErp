@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param; 
+import org.apache.ibatis.annotations.Param;
 
 import com.example.gymerp.dto.SalesItemDto;
 
@@ -25,7 +25,6 @@ public interface SalesItemDao {
     // 판매 내역 수정 및 삭제 시, 기존 수량(oldQuantity)과 상품 정보(productId, codeBId)를 조회합니다.
     Map<String, Object> selectSalesItemForAdjustment(@Param("itemSalesId") Long itemSalesId);
 
-
     // 재고 환원 (입고) 내역을 Purchase 테이블에 기록합니다. (판매 취소/수량 감소 시 사용)
 
     void insertPurchaseForRefund(Map<String, Object> params);
@@ -36,12 +35,13 @@ public interface SalesItemDao {
     // 판매 내역 수정
     int updateSalesItem(SalesItemDto salesItem);
 
-
-	// 상품 판매 내역을 소프트 삭제(status='DELETED') 처리합니다.
-	int deleteSalesItem(Long itemSalesId);
+    // 상품 판매 내역을 소프트 삭제(status='DELETED') 처리합니다.
+    int deleteSalesItem(Long itemSalesId);
 
     // 상품 매출 통계 조회
     List<Map<String, Object>> selectItemSalesAnalytics(Map<String, Object> params);
 
-    
+    // 판매 후 상품 재고 업데이트
+    int updateProductStockAfterSale(Map<String, Object> params);
+
 }

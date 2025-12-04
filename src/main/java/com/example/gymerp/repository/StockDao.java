@@ -10,12 +10,12 @@ import com.example.gymerp.dto.PurchaseDto;
 import com.example.gymerp.dto.StockAdjustmentDto;
 
 public interface StockDao {
-	// 1-1 가용 재고 조회
-	int getAvailableQty(int productId);
-	
-	// 2-1 입고 내역 조회
+    // 1-1 가용 재고 조회
+    int getAvailableQty(int productId);
+
+    // 2-1 입고 내역 조회
     List<PurchaseDto> getPurchaseList(Map<String, Object> params);
-    
+
     // 2-1-1 입고내역 row 수 계산
     int getPurchaseListCount(Map<String, Object> params);
 
@@ -33,5 +33,11 @@ public interface StockDao {
 
     // 3-2 출고 등록
     int insertStockAdjustment(StockAdjustmentDto dto);
-    
+
+    // 3-3 입고 후 상품 재고 업데이트
+    int updateProductStockAfterPurchase(Map<String, Object> params);
+
+    // 3-4 출고 후 상품 재고 업데이트
+    int updateProductStockAfterAdjustment(Map<String, Object> params);
+
 }

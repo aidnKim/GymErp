@@ -200,6 +200,12 @@
       )
   	</insert>
 
+	<update id="updateProductStockAfterPurchase" parameterType="map">
+	    UPDATE PRODUCT
+	    SET current_stock = current_stock + #{quantity}
+	    WHERE productId = #{productId}
+	</update>
+
 	
 	<insert id="insertStockAdjustment" parameterType="StockAdjustmentDto">
       INSERT INTO StockAdjustment (
@@ -218,5 +224,11 @@
           #{notes}
       )
   	</insert>
+
+	<update id="updateProductStockAfterAdjustment" parameterType="map">
+	    UPDATE PRODUCT
+	    SET current_stock = current_stock - #{quantity}
+	    WHERE productId = #{productId}
+	</update>
 	
 </mapper>
