@@ -6,7 +6,7 @@
 
 ## 📖 프로젝트 소개
 **AI 기반의 매출/회원 수 예측 기능을 포함한 지능형 ERP 시스템**입니다.
-단순한 관리 기능을 넘어, 대용량 트랜잭션 상황에서도 **데이터의 정합성(Data Integrity)**을 보장하고, 사용자에게 **쾌적한 조회 속도**를 제공하는 안정적인 백엔드 시스템을 구축하는 데 집중했습니다.
+단순한 관리 기능을 넘어, 대용량 트랜잭션 상황에서도 **데이터의 정합성(Data Integrity)** 을 보장하고, 사용자에게 **쾌적한 조회 속도**를 제공하는 안정적인 백엔드 시스템을 구축하는 데 집중했습니다.
 
 * **개발 기간:** 2025.10 ~ 2025.11 (4주)
 * **개발 인원:** 총 9명 (Backend 4명, Frontend 5명 / 기능 단위 풀스택 협업)
@@ -37,7 +37,7 @@ AWS EC2와 Docker를 활용하여 독립적인 배포 환경을 구축하였으�
 
 ### 1. 재고 조회 성능 86% 개선 (반정규화 적용)
 * **문제:** 초기 설계 시 입/출고 로그를 실시간으로 집계(`SUM`)하여 재고를 산출했으나, 데이터 증가 시 **조회 속도가 평균 2.54s까지 지연**되는 문제 발생. (N+1 및 고비용 연산 문제)
-* **해결:** 읽기(Read) 성능 확보를 위해 **반정규화(Denormalization)**를 적용. `current_stock` 컬럼을 추가하여 연산 시점을 '조회'에서 '쓰기(입출고)' 시점으로 이동시키는 **Calculation on Write** 전략 채택.
+* **해결:** 읽기(Read) 성능 확보를 위해 **반정규화(Denormalization)** 를 적용. `current_stock` 컬럼을 추가하여 연산 시점을 '조회'에서 '쓰기(입출고)' 시점으로 이동시키는 **Calculation on Write** 전략 채택.
 * **결과:** 복잡한 Join과 연산을 단순 조회(O(1))로 변경하여 **응답 속도 0.35s 달성 (약 7배 단축)**.
 
 ### 2. 데이터 무결성 보장을 위한 트랜잭션 관리
@@ -53,7 +53,9 @@ AWS EC2와 Docker를 활용하여 독립적인 배포 환경을 구축하였으�
 <a href="https://www.erdcloud.com/d/xvPxpRBEiL5KuEF8E" target="_blank">
   <img width="1154" height="815" alt="Image" src="https://github.com/user-attachments/assets/479a5c2f-fce3-4d6a-9f3c-5e622dde4dab" />
 </a>
-> 👆 **위 이미지를 클릭**하거나 **[여기(ERD Cloud)](https://www.erdcloud.com/d/xvPxpRBEiL5KuEF8E)**를 누르면 상세 컬럼과 관계를 확인할 수 있습니다.
+<br>
+
+> 👆 **위 이미지를 클릭**하거나 <a href="https://www.erdcloud.com/d/xvPxpRBEiL5KuEF8E" target="_blank">여기(ERD Cloud)</a>를 누르면 상세 컬럼과 관계를 확인할 수 있습니다.
 
 <br>
 
