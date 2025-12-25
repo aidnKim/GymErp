@@ -1,10 +1,10 @@
-# 🏋️‍♀️ Gym ERP: 스마트 헬스장 통합 관리 시스템
+# Gym ERP: 스마트 헬스장 통합 관리 시스템
 
 > **데이터 무결성과 조회 성능을 최우선으로 고려한 헬스장 전용 ERP 솔루션입니다.**
 
 <br>
 
-## 📖 프로젝트 소개
+## 프로젝트 소개
 **AI 기반의 매출/회원 수 예측 기능을 포함한 지능형 ERP 시스템**입니다.
 단순한 관리 기능을 넘어, 대용량 트랜잭션 상황에서도 **데이터의 정합성(Data Integrity)** 을 보장하고, 사용자에게 **쾌적한 조회 속도**를 제공하는 안정적인 백엔드 시스템을 구축하는 데 집중했습니다.
 
@@ -15,7 +15,7 @@
 
 <br>
 
-## 🛠️ 기술 스택 (Tech Stack)
+## 기술 스택 (Tech Stack)
 
 | 구분 | 기술 |
 | :-- | :-- |
@@ -26,14 +26,14 @@
 
 <br>
 
-## 🏗️ 시스템 아키텍처 (Architecture)
+## 시스템 아키텍처 (Architecture)
 AWS EC2와 Docker를 활용하여 독립적인 배포 환경을 구축하였으며, Nginx를 Reverse Proxy로 두어 보안과 성능을 강화했습니다. GitHub Actions를 통해 CI/CD 파이프라인을 자동화했습니다.
 
 ![System Architecture](https://github.com/user-attachments/assets/9af224a0-8e2f-4a87-9a71-f5a3d9fd0aa5)
 
 <br>
 
-## 🔥 핵심 기술적 성과 (Troubleshooting)
+## 핵심 기술적 성과 (Troubleshooting)
 
 ### 1. 재고 조회 성능 86% 개선 (반정규화 적용)
 * **문제:** 초기 설계 시 입/출고 로그를 실시간으로 집계(`SUM`)하여 재고를 산출했으나, 데이터 증가 시 **조회 속도가 평균 2.54s까지 지연**되는 문제 발생. (N+1 및 고비용 연산 문제)
@@ -47,7 +47,7 @@ AWS EC2와 Docker를 활용하여 독립적인 배포 환경을 구축하였으�
 
 <br>
 
-## 📂 ERD (Database Design)
+## ERD (Database Design)
 상품, 재고, 판매 데이터가 유기적으로 연결되도록 정규화된 모델링을 수행했습니다.
 
 <a href="https://www.erdcloud.com/d/xvPxpRBEiL5KuEF8E" target="_blank">
@@ -59,14 +59,14 @@ AWS EC2와 Docker를 활용하여 독립적인 배포 환경을 구축하였으�
 
 <br>
 
-## 🚀 주요 기능 (Key Features)
+## 주요 기능 (Key Features)
 * **상품/재고 관리:** 실시간 재고 트래킹 및 입출고 이력 관리
 * **회원/직원 관리:** 회원권 등록 및 PT 배정 시스템
 * **매출 통계:** 일별/월별 매출 시각화 및 AI 예측 데이터 제공 (Python 연동)
 
 <br>
 
-## 🧑‍💻 담당 역할 (My Contribution)
+## 담당 역할 (My Contribution)
 **상품 및 재고 관리 도메인 전담**
 * **Database:** Oracle DB 설계 및 PL/SQL 튜닝, 반정규화 모델링
 * **Backend:** RESTful API 설계 및 구현, 트랜잭션 및 동시성 제어 로직 구현
