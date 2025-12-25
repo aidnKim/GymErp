@@ -137,5 +137,21 @@ public class StockDaoImpl implements StockDao {
 	public int updateProductStockAfterAdjustment(Map<String, Object> params) {
 		return session.update("StockMapper.updateProductStockAfterAdjustment", params);
 	}
+	
+	/*
+     * 4-1 불일치 상품 목록 조회 (배치용)
+     */
+    @Override
+    public List<Map<String, Object>> findMismatchedProducts() {
+        return session.selectList("StockMapper.findMismatchedProducts");
+    }
+
+	/*
+	 * 4-2 재고 동기화 (배치용)
+	 */
+	@Override
+	public int syncAllProductStock() {
+		return session.update("StockMapper.syncAllProductStock");
+	}
 
 }
