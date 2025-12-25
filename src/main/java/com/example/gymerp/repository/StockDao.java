@@ -39,5 +39,11 @@ public interface StockDao {
 
     // 3-4 출고 후 상품 재고 업데이트
     int updateProductStockAfterAdjustment(Map<String, Object> params);
+    
+    // 4-1 불일치 상품 목록 조회 (배치용)
+    List<Map<String, Object>> findMismatchedProducts();
+    
+    // 4-2 재고 동기화 (배치용)
+    int syncAllProductStock();
 
 }

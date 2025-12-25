@@ -111,6 +111,7 @@ jobs:
               -e ORACLE_URL=jdbc:oracle:thin:@${{ env.ORACLE_CONTAINER_NAME }}:1521:xe \
               -e FILE_LOCATION=/app/upload \
               -v /home/ec2-user/spring/upload:/app/upload \
+              -v /home/ec2-user/spring/logs:/app/logs \
               "${{ env.IMAGE_NAME }}:latest"
 
 

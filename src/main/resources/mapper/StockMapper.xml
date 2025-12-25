@@ -231,4 +231,31 @@
 	    WHERE productId = #{productId}
 	</update>
 	
+	<update id="syncAllProductStock">
+	    UPDATE PRODUCT pr
+	    SET current_stock = (
+	        NVL((SELECT SUM(quantity) FROM PURCHASE WHERE productId = pr.productId), 0)
+	        - NVL((SELECT SUM(quantity) FROM STOCKADJUSTMENT WHERE productId = pr.productId), 0)
+	        - NVL((SELECT SUM(quantity) FROM SALES_ITEM WHERE productId = pr.productId AND status='ACTIVE'), 0)
+	    )
+	</update>
+	
+	<select id="findMismatchedProducts" resultType="map">
+	    SELECT 
+	        p.productId,
+	        p.name,
+	        p.current_stock AS currentStock,
+	        (
+	            NVL((SELECT SUM(quantity) FROM PURCHASE WHERE productId = p.productId), 0)
+	            - NVL((SELECT SUM(quantity) FROM STOCKADJUSTMENT WHERE productId = p.productId), 0)
+	            - NVL((SELECT SUM(quantity) FROM SALES_ITEM WHERE productId = p.productId AND status='ACTIVE'), 0)
+	        ) AS calculatedStock
+	    FROM PRODUCT p
+	    WHERE p.current_stock != (
+	        NVL((SELECT SUM(quantity) FROM PURCHASE WHERE productId = p.productId), 0)
+	        - NVL((SELECT SUM(quantity) FROM STOCKADJUSTMENT WHERE productId = p.productId), 0)
+	        - NVL((SELECT SUM(quantity) FROM SALES_ITEM WHERE productId = p.productId AND status='ACTIVE'), 0)
+	    )
+	</select>
+	
 </mapper>
